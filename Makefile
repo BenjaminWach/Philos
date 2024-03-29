@@ -6,7 +6,7 @@
 #    By: bwach <bwach@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/29 11:41:20 by bwach             #+#    #+#              #
-#    Updated: 2024/03/29 12:02:01 by bwach            ###   ########.fr        #
+#    Updated: 2024/03/29 16:20:18 by bwach            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,15 @@ HEADER_SRCS = Philosophers.h
 HEADER_DIR = include/
 HEADER = $(addprefix $(HEADER_DIR), $(HEADER_SRCS))
 
-MPATH_SRCS = 
+MPATH_SRCS = main.c  
 MPATH_DIR = srcs/
 MPATH = $(addprefix $(MPATH_DIR), $(MPATH_SRCS))
 OBJ_M = $(MPATH:.c=.o)
+
+UTILS_SRCS = time.c
+UTIL_DIR = utils/
+UTILS = $(addprefix $(UTIL_DIR), $(UTILS_SRCS))
+OBJ_U = $(UTILS:.c=.o)
 
 #Commands
 %.o: %.c $(HEADER) Makefile
@@ -56,7 +61,7 @@ $(NAME): $(OBJ_M)
 	@echo "$(GREEN)██╔═══╝ ██╔══██║██║██║     ██║   ██║╚════██║██║   ██║██╔═══╝ ██╔══██║██╔══╝  ██╔══██╗╚════██║$(DEFAULT)"
 	@echo "$(GREEN)██║     ██║  ██║██║███████╗╚██████╔╝███████║╚██████╔╝██║     ██║  ██║███████╗██║  ██║███████║$(DEFAULT)"
 	@echo "$(GREEN)╚═╝     ╚═╝  ╚═╝╚═╝╚══════╝ ╚═════╝ ╚══════╝ ╚═════╝ ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝$(DEFAULT)"
-	@$(CC) $(OBJ_M) -o $(NAME)
+	@$(CC) $(OBJ_M) $(OBJ_U) -o $(NAME)
 
 clean:
 	@$(RM) $(OBJ_M)
