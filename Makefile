@@ -6,7 +6,7 @@
 #    By: bwach <bwach@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/29 11:41:20 by bwach             #+#    #+#              #
-#    Updated: 2024/03/29 16:20:18 by bwach            ###   ########.fr        #
+#    Updated: 2024/04/01 11:17:48 by bwach            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ MPATH_DIR = srcs/
 MPATH = $(addprefix $(MPATH_DIR), $(MPATH_SRCS))
 OBJ_M = $(MPATH:.c=.o)
 
-UTILS_SRCS = time.c
+UTILS_SRCS = time.c utils.c init_utils.c
 UTIL_DIR = utils/
 UTILS = $(addprefix $(UTIL_DIR), $(UTILS_SRCS))
 OBJ_U = $(UTILS:.c=.o)
@@ -45,10 +45,10 @@ OBJ_U = $(UTILS:.c=.o)
 
 all: $(NAME) norminette
 
-norminette: norminette:
+norminette: 
 	@$(PRINTF) "$(CYAN)\nCheck with dat Norminette: $(BIN) $(DEFAULT)\n"
-	@norminette -R CheckForbiddenSourceHeader $(MPATH_DIR) $(UTIL_DIR) $(LBFT_DIR)/*.c
-	@norminette -R CheckDefine $(MPATH_DIR) $(UTIL_DIR) $(LIBFT_DIR)/*.c
+	@norminette -R CheckForbiddenSourceHeader $(MPATH_DIR) $(UTIL_DIR)/*.c
+	@norminette -R CheckDefine $(MPATH_DIR) $(UTIL_DIR)/*.c
 	@echo "$(CYAN)\nNorminette done and validated 🤣\n $(DEFAULT)"
 
 $(NAME): $(OBJ_M)

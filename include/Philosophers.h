@@ -6,12 +6,12 @@
 /*   By: bwach <bwach@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:02:15 by bwach             #+#    #+#             */
-/*   Updated: 2024/03/29 16:14:38 by bwach            ###   ########.fr       */
+/*   Updated: 2024/04/01 11:41:23 by bwach            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS.H
-# define PHILOSOPHERS.H
+#ifndef PHILOSOPHERS_H
+# define PHILOSOPHERS_H
 
 # include <memory.h>
 # include <pthread.h>
@@ -22,36 +22,42 @@
 
 typedef struct s_philo
 {
-	pthread_t	t;
-	int			name;
-	int			nb_meal;
-	int			time_lastMeal;
-	int			time_ofDeath;
-	int			fork1;
-	int			fork2;
+	pthread_t		t;
+	int				number;
+	int				nb_meal;
+	int				time_lastmeal;
+	int				time_ofdeath;
+	int				fork1;
+	int				fork2;
 	struct s_scene	*scene;
 }	t_philo;
 
 typedef struct s_scene
 {
-	int	running_time;
-	int	nb_philos;
-	int	die_time;
-	int	eat_time;
-	int	sleep_time;
-	int	nb_meals;
-	int	start;
-	t_philo		**philos;
-	pthread_t	witness;
+	int				running_time;
+	int				nb_philos;
+	int				die_time;
+	int				eat_time;
+	int				sleep_time;
+	int				nb_meals;
+	int				start;
+	t_philo			**philos;
+	pthread_t		monitor;
 	pthread_mutex_t	scene_mutex;
-	pthread_mutex_t *fork_mutex;
+	pthread_mutex_t	*fork_mutex;
 }	t_scene;
 
 //main
-int	main(int ac, char **);
+int	main(int ac, char **av);
 
 //time
-int ft_gettime();
+int	ft_gettime(void);
 
+//utils
+int	ft_atoi(const char *str);
+int	is_negative(int ac, char **av);
+int	mutex_init(t_scene *scene);
+int	philo_init(t_scene *scene);
+int	ft_control(void);
 
-# endif
+#endif
