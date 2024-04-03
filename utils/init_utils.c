@@ -6,7 +6,7 @@
 /*   By: bwach <bwach@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 10:49:51 by bwach             #+#    #+#             */
-/*   Updated: 2024/04/01 11:16:17 by bwach            ###   ########.fr       */
+/*   Updated: 2024/04/03 15:34:33 by bwach            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ int	philo_struct_init(t_scene *scene)
 		if (!scene->philos[i])
 			return (0);
 		scene->philos[i]->scene = scene;
-		scene->philos[i]->number = i + 1;
+		scene->philos[i]->id = i + 1;
 		scene->philos[i]->nb_meal = 0;
 		scene->philos[i]->time_lastmeal = 0;
 		scene->philos[i]->time_ofdeath = scene->die_time;
+		scene->philos[i]->p = pthread_create(p[i], NULL, &philo_life, NULL);
 	}
 }
 
