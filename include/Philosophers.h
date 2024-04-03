@@ -6,7 +6,7 @@
 /*   By: bwach <bwach@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:02:15 by bwach             #+#    #+#             */
-/*   Updated: 2024/04/03 15:22:49 by bwach            ###   ########.fr       */
+/*   Updated: 2024/04/03 15:31:56 by bwach            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 typedef struct s_philo
 {
-	pthread_t		t;
+	pthread_t		p;
 	int				id;
 	int				nb_meal;
 	int				time_lastmeal;
