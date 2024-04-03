@@ -6,7 +6,7 @@
 /*   By: bwach <bwach@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:02:15 by bwach             #+#    #+#             */
-/*   Updated: 2024/04/03 15:31:56 by bwach            ###   ########.fr       */
+/*   Updated: 2024/04/03 23:19:55 by bwach            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,19 @@ typedef struct s_scene
 }	t_scene;
 
 //main
-int	main(int ac, char **av);
+int		main(int ac, char **av);
+int		ft_letemcook(t_scene *scene);
+void*	philo_life(void* arg);
 
 //time
-int	ft_gettime(void);
+int		ft_gettime(void);
 
 //utils
-int	ft_atoi(const char *str);
-int	is_negative(int ac, char **av);
-int	mutex_init(t_scene *scene);
-int	philo_init(t_scene *scene);
-int	ft_control(void);
+int		ft_atoi(const char *str);
+int		is_negative(int ac, char **av);
+int		mutex_init(t_scene *scene);
+int		philo_init(t_scene *scene);
+void	forks_init(t_philo *philo, int i, int nb_philos);
+int		ft_control(void);
 
 #endif

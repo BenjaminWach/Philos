@@ -6,7 +6,7 @@
 #    By: bwach <bwach@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/29 11:41:20 by bwach             #+#    #+#              #
-#    Updated: 2024/04/01 11:17:48 by bwach            ###   ########.fr        #
+#    Updated: 2024/04/03 22:32:59 by bwach            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ HEADER_SRCS = Philosophers.h
 HEADER_DIR = include/
 HEADER = $(addprefix $(HEADER_DIR), $(HEADER_SRCS))
 
-MPATH_SRCS = main.c  
+MPATH_SRCS = main.c philo_func.c 
 MPATH_DIR = srcs/
 MPATH = $(addprefix $(MPATH_DIR), $(MPATH_SRCS))
 OBJ_M = $(MPATH:.c=.o)

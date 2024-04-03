@@ -6,11 +6,22 @@
 /*   By: bwach <bwach@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 10:49:51 by bwach             #+#    #+#             */
-/*   Updated: 2024/04/03 15:34:33 by bwach            ###   ########.fr       */
+/*   Updated: 2024/04/03 23:19:20 by bwach            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Philosophers.h"
+
+void	forks_init(t_philo *philo, int i, int nb_philos)
+{
+	philo->fork1 = i;
+	philo->fork2 = (i + 1) % nb_philos;
+	if (philo->id % 2)
+	{
+		philo->fork1 = (i + 1) % nb_philos;
+		philo->fork2 = i;
+	}
+}
 
 //alloue de la memoire heaps pour chaque philo (avec leurs propres ressources)
 int	philo_struct_init(t_scene *scene)
@@ -28,7 +39,9 @@ int	philo_struct_init(t_scene *scene)
 		scene->philos[i]->nb_meal = 0;
 		scene->philos[i]->time_lastmeal = 0;
 		scene->philos[i]->time_ofdeath = scene->die_time;
-		scene->philos[i]->p = pthread_create(p[i], NULL, &philo_life, NULL);
+		forks_init(scene->philos[i], i, scene->nb_philos);
+		scene->philos[i]->p = pthread_create(scene->philos[i]->p, NULL,
+				philo_life, NULL);
 	}
 }
 

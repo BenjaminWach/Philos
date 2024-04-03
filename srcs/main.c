@@ -6,7 +6,7 @@
 /*   By: bwach <bwach@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:32:14 by bwach             #+#    #+#             */
-/*   Updated: 2024/04/01 10:48:31 by bwach            ###   ########.fr       */
+/*   Updated: 2024/04/03 22:50:04 by bwach            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ int	main(int ac, char **av)
 		return (-1);
 	}
 	if (init_struct_scene(&scene, ac, av))
-		philo_life(&scene);
+		ft_letemcook(&scene);
 	free_struct(scene);
 }
