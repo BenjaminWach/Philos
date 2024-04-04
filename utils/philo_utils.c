@@ -6,7 +6,7 @@
 /*   By: bwach <bwach@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 22:35:03 by bwach             #+#    #+#             */
-/*   Updated: 2024/04/03 23:41:31 by bwach            ###   ########.fr       */
+/*   Updated: 2024/04/04 15:54:27 by bwach            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,5 @@ int	ft_letemcook(t_scene *scene)
 
 void* philo_life(void* arg)
 {
-	t_philo *philo;
-	t_scene *scene;
-
-	philo = (t_philo *)arg;
-	scene = philo->scene;
-	while (!scene->running_time)
-	{
-	}
+	
 }

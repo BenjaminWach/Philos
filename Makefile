@@ -6,7 +6,7 @@
 #    By: bwach <bwach@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/29 11:41:20 by bwach             #+#    #+#              #
-#    Updated: 2024/04/03 22:32:59 by bwach            ###   ########.fr        #
+#    Updated: 2024/04/04 11:45:19 by bwach            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ MPATH_DIR = srcs/
 MPATH = $(addprefix $(MPATH_DIR), $(MPATH_SRCS))
 OBJ_M = $(MPATH:.c=.o)
 
-UTILS_SRCS = time.c utils.c init_utils.c
+UTILS_SRCS = time.c utils.c init_utils.c philo_utils.c groundcontrol_to.c free_them.c
 UTIL_DIR = utils/
 UTILS = $(addprefix $(UTIL_DIR), $(UTILS_SRCS))
 OBJ_U = $(UTILS:.c=.o)

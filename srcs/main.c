@@ -6,7 +6,7 @@
 /*   By: bwach <bwach@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:32:14 by bwach             #+#    #+#             */
-/*   Updated: 2024/04/03 22:50:04 by bwach            ###   ########.fr       */
+/*   Updated: 2024/04/04 11:36:43 by bwach            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ int	main(int ac, char **av)
 	}
 	if (init_struct_scene(&scene, ac, av))
 		ft_letemcook(&scene);
-	free_struct(scene);
+	free_struct(&scene);
 }
