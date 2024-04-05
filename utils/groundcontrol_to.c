@@ -6,23 +6,39 @@
 /*   By: bwach <bwach@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 11:40:32 by bwach             #+#    #+#             */
-/*   Updated: 2024/04/04 15:54:23 by bwach            ###   ########.fr       */
+/*   Updated: 2024/04/05 18:47:34 by bwach            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Philosophers.h"
 
-int	check_death_philo(int time, t_scene *scene, t_philo *philo)
+//security for the running_time
+int	life_is_on(t_scene *scene)
 {
-	if (time == philo->time_ofdeath)
+	pthread_mutex_lock(&scene->scene_mutex);
+	if (scene->running_time)
 	{
-		printf("%d philo number %d has died\n",time ,philo->id);
-		return (0);
-	}
-	else
-	{
+		pthread_mutex_unlock(&scene->scene_mutex);
 		return (1);
 	}
+	pthread_mutex_unlock(&scene->scene_mutex);
+	return (0);
+}
+
+int	check_death_philo(int time, t_scene *scene, t_philo *philo)
+{
+	int	time_elasped;
+
+	time_elasped = time - scene->start;
+	if (philo->time_ofdeath < (time_elasped))
+	{
+		pthread_mutex_lock(&scene->scene_mutex);
+		scene->running_time = 0;
+		printf("%d %d died\n", time_elasped, philo->id);
+		pthread_mutex_unlock(&scene->scene_mutex);
+		return (0);
+	}
+	return (1);
 }
 
 //check if le philo est mort ou non

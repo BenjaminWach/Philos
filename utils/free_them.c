@@ -6,13 +6,13 @@
 /*   By: bwach <bwach@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 11:25:47 by bwach             #+#    #+#             */
-/*   Updated: 2024/04/04 11:34:47 by bwach            ###   ########.fr       */
+/*   Updated: 2024/04/05 10:41:35 by bwach            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Philosophers.h"
 
-void	free_struct(t_scene *scene)
+int	free_struct(t_scene *scene)
 {
 	int	i;
 
@@ -21,7 +21,7 @@ void	free_struct(t_scene *scene)
 	{
 		while (i < scene->nb_philos)
 		{
-			free(scene->philos[i]);
+			//free all: mutex, philos
 			i++;
 		}
 		free(scene);
