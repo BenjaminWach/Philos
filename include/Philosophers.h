@@ -6,7 +6,7 @@
 /*   By: bwach <bwach@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:02:15 by bwach             #+#    #+#             */
-/*   Updated: 2024/04/05 19:05:55 by bwach            ###   ########.fr       */
+/*   Updated: 2024/04/07 10:18:42 by bwach            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_philo
 
 typedef struct s_scene
 {
-	int				running_time;
+	int				is_running;
 	int				nb_philos;
 	int				die_time;
 	int				eat_time;
@@ -54,9 +54,9 @@ void	*philo_life(void *arg);
 
 //philos
 void	philo_lonely(t_scene *scene, t_philo *philo);
-int		philo_eat(t_scene *scene, t_philo *philo);
-int		philo_sleep(t_scene *scene, t_philo *philo);
-int		philo_think(t_scene *scene, t_philo *philo);
+void	philo_eat(t_scene *scene, t_philo *philo);
+void	philo_sleep(t_scene *scene, t_philo *philo);
+void	philo_think(t_scene *scene, t_philo *philo);
 
 //time
 int		ft_gettime(void);
@@ -70,8 +70,8 @@ int		philo_init(t_scene *scene);
 void	forks_init(t_philo *philo, int i, int nb_philos);
 
 //threads
-int		ft_control(void);
-int		life_is_on(t_scene *scene);
+void	*ft_control(void *arg);
+int		simulation_is_on(t_scene *scene);
 
 //cleaning
 void	free_struct(t_scene *scene);

@@ -6,7 +6,7 @@
 /*   By: bwach <bwach@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:32:14 by bwach             #+#    #+#             */
-/*   Updated: 2024/04/04 11:36:43 by bwach            ###   ########.fr       */
+/*   Updated: 2024/04/07 10:18:42 by bwach            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	init_struct_scene(t_scene *scene, int ac, char **av)
 {
-	scene->running_time = 0;
+	scene->is_running = 0;
 	scene->nb_philos = ft_atoi(av[1]);
 	scene->die_time = ft_atoi(av[2]);
 	scene->eat_time = ft_atoi(av[3]);
@@ -35,14 +35,12 @@ int	init_struct_scene(t_scene *scene, int ac, char **av)
 
 static int	check_valid_args(int ac, char **av)
 {
-	if ((ac > 6 || ac < 5) || !is_negative(ac, av))
+	if ((ac < 5 || ac > 6) || !is_negative(ac, av))
 	{
 		printf("Enter the right format for the args"
-			"or Use positive numbers only!\n");
-		return (-1);
+			" or Use positive numbers only!\n");
+		return (1);
 	}
-	if (ft_atoi(av[1]) == 0)
-		return (-1);
 	return (0);
 }
 
@@ -50,10 +48,10 @@ int	main(int ac, char **av)
 {
 	t_scene	scene;
 
-	if (!check_valid_args(ac, av))
-	{
-		return (-1);
-	}
+	if (check_valid_args(ac, av))
+		exit(2);
+	if (ft_atoi(av[1]) == 0)
+		return (0);
 	if (init_struct_scene(&scene, ac, av))
 		ft_letemcook(&scene);
 	free_struct(&scene);

@@ -6,7 +6,7 @@
 /*   By: bwach <bwach@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 16:10:07 by bwach             #+#    #+#             */
-/*   Updated: 2024/04/05 19:06:12 by bwach            ###   ########.fr       */
+/*   Updated: 2024/04/06 17:50:48 by bwach            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 int	ft_gettime(void)
 {
-	struct timespec	time;
-	int				mill_sec;
+	struct timeval	time;
 
-	clock_gettime(&time, NULL);
-	mill_sec = time.tv_sec * 1000 + time.tv_nsec / 1000;
-	return (mill_sec);
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1e3) + (time.tv_usec / 1e6));
 }
 
 //philo impair is sleeping at the start

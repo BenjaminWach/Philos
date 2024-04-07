@@ -6,7 +6,7 @@
 #    By: bwach <bwach@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/29 11:41:20 by bwach             #+#    #+#              #
-#    Updated: 2024/04/04 11:45:19 by bwach            ###   ########.fr        #
+#    Updated: 2024/04/06 17:00:56 by bwach            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,13 @@ CYAN = \033[0;36m
 DEFAULT = \033[0m
 
 #Name and Aliases
-NAME = Philosophers
+NAME = philo
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
+LEAKS = leaks --atExit --
 RM = rm -f
 PRINTF = printf
-BIN = Philosophers
+BIN = philo
 
 #Files and paths
 HEADER_SRCS = Philosophers.h 
@@ -34,14 +35,14 @@ MPATH_DIR = srcs/
 MPATH = $(addprefix $(MPATH_DIR), $(MPATH_SRCS))
 OBJ_M = $(MPATH:.c=.o)
 
-UTILS_SRCS = time.c utils.c init_utils.c philo_utils.c groundcontrol_to.c free_them.c
+UTIL_SRCS = time.c utils.c init_utils.c philo_utils.c groundcontrol_to.c free_them.c
 UTIL_DIR = utils/
-UTILS = $(addprefix $(UTIL_DIR), $(UTILS_SRCS))
+UTILS = $(addprefix $(UTIL_DIR), $(UTIL_SRCS))
 OBJ_U = $(UTILS:.c=.o)
 
 #Commands
 %.o: %.c $(HEADER) Makefile
-	@$(CC) $(FLAGS) -c $< -o $@ -I $(HEADER_DIR)
+	@$(CC) $(FLAGS) -I $(HEADER_DIR) -c $< -o $@
 
 all: $(NAME) norminette
 
@@ -51,20 +52,21 @@ norminette:
 	@norminette -R CheckDefine $(MPATH_DIR) $(UTIL_DIR)/*.c
 	@echo "$(CYAN)\nNorminette done and validated 🤣\n $(DEFAULT)"
 
-$(NAME): $(OBJ_M)
+$(NAME): $(OBJ_M) $(OBJ_U)
 	@echo "$(GREEN)-----------------------------------------------$(DEFAULT)"
 	@echo "$(CYAN)\n            Compiling $(NAME)...			\n$(DEFAULT)"
-	@echo "$(GREEN)-----------------------------------------------$(DEFAULT)"
+	@echo "$(GREEN)-----------------------------------------------\n\n$(DEFAULT)"
 	@echo "$(GREEN)██████╗ ██╗  ██╗██╗██╗      ██████╗ ███████╗ ██████╗ ██████╗ ██╗  ██╗███████╗██████╗ ███████╗$(DEFAULT)"
 	@echo "$(GREEN)██╔══██╗██║  ██║██║██║     ██╔═══██╗██╔════╝██╔═══██╗██╔══██╗██║  ██║██╔════╝██╔══██╗██╔════╝$(DEFAULT)"
 	@echo "$(GREEN)██████╔╝███████║██║██║     ██║   ██║███████╗██║   ██║██████╔╝███████║█████╗  ██████╔╝███████╗$(DEFAULT)"
 	@echo "$(GREEN)██╔═══╝ ██╔══██║██║██║     ██║   ██║╚════██║██║   ██║██╔═══╝ ██╔══██║██╔══╝  ██╔══██╗╚════██║$(DEFAULT)"
 	@echo "$(GREEN)██║     ██║  ██║██║███████╗╚██████╔╝███████║╚██████╔╝██║     ██║  ██║███████╗██║  ██║███████║$(DEFAULT)"
 	@echo "$(GREEN)╚═╝     ╚═╝  ╚═╝╚═╝╚══════╝ ╚═════╝ ╚══════╝ ╚═════╝ ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝$(DEFAULT)"
-	@$(CC) $(OBJ_M) $(OBJ_U) -o $(NAME)
+	@$(CC) $(OBJ_U) $(OBJ_M) -o $(NAME)
 
 clean:
 	@$(RM) $(OBJ_M)
+	@$(RM) $(OBJ_U)
 	@echo -e: "$(RED)object files deleted!$(DEFAULT)"
 
 fclean: clean
@@ -73,4 +75,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re norminette
+run: re
+	$(LEAKS) ./$(NAME) 10 1000 200 200 2
+
+.PHONY: all clean fclean re

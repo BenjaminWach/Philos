@@ -6,7 +6,7 @@
 /*   By: bwach <bwach@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 10:49:51 by bwach             #+#    #+#             */
-/*   Updated: 2024/04/03 23:19:20 by bwach            ###   ########.fr       */
+/*   Updated: 2024/04/06 17:30:59 by bwach            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,13 @@ int	philo_struct_init(t_scene *scene)
 		scene->philos[i]->time_lastmeal = 0;
 		scene->philos[i]->time_ofdeath = scene->die_time;
 		forks_init(scene->philos[i], i, scene->nb_philos);
-		scene->philos[i]->p = pthread_create(scene->philos[i]->p, NULL,
-				philo_life, NULL);
+		if (pthread_create(&scene->philos[i]->p, NULL,
+				philo_life, (void *)scene->philos[i]))
+			return (0);
+		i++;
 	}
+	scene->philos[i] = NULL;
+	return (1);
 }
 
 //alloue de la memoire heaps pour les mutex
